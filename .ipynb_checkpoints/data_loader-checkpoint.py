@@ -22,30 +22,35 @@ def get_analyse_results_by_ticker(ticker, analyse_type):
 
 
 def get_close_prices():
-    df = pd.DataFrame(columns=config.watch_list_shares)
-
-    for ticker in config.watch_list_shares:
+    watch_list_shares = config.get_watch_list_shares()
+    df = pd.DataFrame(columns=watch_list_shares)
+    
+    for ticker in watch_list_shares:
         df_candles = get_candles_by_ticker(ticker)
-        df[ticker] = df_candles["close"]
+
+        if len(df_candles) > 0:
+            df[ticker] = df_candles["close"]
     
     return df
 
 
 def get_normalized_close_prices():
-    df = pd.DataFrame(columns=config.watch_list_shares)
-
-    for ticker in config.watch_list_shares:
+    watch_list_shares = config.get_watch_list_shares()
+    df = pd.DataFrame(columns=watch_list_shares)
+    
+    for ticker in watch_list_shares:
         df_candles = get_candles_by_ticker(ticker)
-        df[ticker] = df_candles["close"] / df_candles["close"][0]
+
+        if len(df_candles) > 0:
+            df[ticker] = df_candles["close"] / df_candles["close"][0]
     
     return df
 
 
-def get_ltm():
-    df = pd.DataFrame(columns=config.watch_list_shares)
-
-    for ticker in config.watch_list_shares:
-        df_analyse_results = get_analyse_results_by_ticker(ticker, "YieldLtm")
-        df[ticker] = df_analyse_results["result_number"]
+def get_imoex_ltm():
+    ticker = 'IMOEX'
+    df = pd.DataFrame(columns=[ticker])
+    df_analyse_results = get_analyse_results_by_ticker(ticker, "YieldLtm")
+    df[ticker] = df_analyse_results["result_number"]
     
     return df
