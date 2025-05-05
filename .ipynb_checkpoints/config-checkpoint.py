@@ -13,7 +13,7 @@ end_date = '2025-12-31'
 
 
 def get_watch_list_shares():
-    file_name = 'c:\\Deploy\\Oid85.FinMarket.ResourceStore\\watchLists\\shares.json'
+    file_name = 'c:\\Deploy\\Oid85.FinMarket.ResourceStore\\tickerLists\\shares\\watchlist.json'
 
     if os.path.isfile(file_name):
         with open(file_name) as json_file:
@@ -23,7 +23,7 @@ def get_watch_list_shares():
 
 
 def get_watch_list_indexes():
-    file_name = 'c:\\Deploy\\Oid85.FinMarket.ResourceStore\\watchLists\\indexes.json'
+    file_name = 'c:\\Deploy\\Oid85.FinMarket.ResourceStore\\tickerLists\\indexes\\watchlist.json'
 
     if os.path.isfile(file_name):
         with open(file_name) as json_file:
